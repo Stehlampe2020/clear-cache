@@ -1,11 +1,19 @@
 #!/bin/bash
-installer_version=1.0
-printf "clear-cache installer $installer_version, installing clear-cache...\n"
+installer_version=1.1
+printf "clear-cache installer $installer_version\n"
 sleep 1
+if [ "$1" == "--uninstall" ]
+then
+    printf "Uninstalling clear-cache...\n"
+    sudo rm -v /bin/clear-cache
+    printf "Uninstall complete!\n"
+    sleep 3
+    exit
+fi
 printf "Creating program file...\n"
 cat << '**ENDOFFILE**' > /tmp/clear-cache.tmp
 #!/bin/bash
-version=1.2.1
+version=1.2.2
 printf "clear-cache, version $version\n"
 datevar=$(date "+%F-%T-%Z")
 cachepath="$HOME/.cache"
@@ -14,7 +22,7 @@ then
     printf "Log file: $cachepath/cache_cleared_$datevar.log\n"
 elif [ -f "$cachepath/cache_cleared_$datevar.log" ]
 then
-    printf "Log file: $cachepath/cache_cleared_$datevar.log (overwriting old log!)\n"
+    printf "Log file: $cachepath/cache_cleared_$datevar.log (overwriting older log!)\n"
 fi    
 rm -vr $cachepath/.fr-* &> "$cachepath/cache_cleared_$datevar.log"
 rm -vr $cachepath/thumbnails/* &>> "$cachepath/cache_cleared_$datevar.log"
