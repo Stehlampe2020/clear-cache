@@ -4,7 +4,7 @@ printf "Creating program file...\n"
 cat << '**ENDOFFILE**' > /tmp/clear-cache.tmp
 #!/bin/bash
 version=1.2.1
-prontf "clear-cache, version $version\n"
+printf "clear-cache, version $version\n"
 datevar=$(date "+%F-%T-%Z")
 cachepath="$HOME/.cache"
 if [[ ! -f "$cachepath/cache_cleared_$datevar.log" ]]
