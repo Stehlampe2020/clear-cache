@@ -3,7 +3,7 @@ installer_version=1.0
 printf "Creating program file...\n"
 cat << '**ENDOFFILE**' > /tmp/clear-cache.tmp
 #!/bin/bash
-version=1.2
+version=1.2.1
 prontf "clear-cache, version $version\n"
 datevar=$(date "+%F-%T-%Z")
 cachepath="$HOME/.cache"
@@ -48,22 +48,26 @@ fi
 printf "Creating application link...\n"
 cat << '**ENDOFFILE**' > $HOME/.local/share/applications/clear-cache.desktop
 [Desktop Entry]
+Version=1.2.1
 Name=clear-cache
 Comment=Removes much annoying stuff from the cache and stores what it does in a log: ~/.cache/cache_cleared_<date-now>.log; It is also capable to remove its own cache file with "--rm-own-cache".
 Categories=Utility
 Type=Application
 Exec=clear-cache
 Actions=rm-own-cache;rm-whole-cache
+Terminal=true
 
 [Desktop Action rm-own-cache]
 Name=clear-cache: rm-own-cache
 comment=Removes stuff from the cache, including clear-cache log files.
 Exec=clear-cache --rm-own-cache
+Terminal=true
 
 [Desktop Action rm-whole-cache]
 Name=clear-cache: rm-whole-cache
 Comment=Removes all contents from cache, including clear-cache log files.
 Exec=clear-cache --rm-whole-cache
+Terminal=true
 **ENDOFFILE**
 printf "Install complete!\n"
 sleep 3
