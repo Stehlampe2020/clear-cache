@@ -61,7 +61,7 @@ comment=Removes stuff from the cache, including clear-cache log files.
 Exec=clear-cache --rm-own-cache
 
 [Desktop Action rm-whole-cache]
-Name=clear-cache: rm-own-cache
+Name=clear-cache: rm-whole-cache
 Comment=Removes all contents from cache, including clear-cache log files.
 Exec=clear-cache --rm-whole-cache
 **ENDOFFILE**
