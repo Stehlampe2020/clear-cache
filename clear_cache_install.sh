@@ -6,6 +6,7 @@ if [ "$1" == "--uninstall" ]
 then
     printf "Uninstalling clear-cache...\n"
     sudo rm -v /bin/clear-cache
+    rm -v $HOME/.local/share/applications/clear-cache.desktop
     printf "Uninstall complete!\n"
     sleep 3
     exit
