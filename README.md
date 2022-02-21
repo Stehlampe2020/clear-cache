@@ -4,7 +4,7 @@ This little tool clears your linux cache folder up.
 # Use
 ## Installation
 `chmod +x ~/clear-cache/clear_cache_install.sh`   
-`~/clear-cache/clear_cace_install.sh`
+`~/clear-cache/clear_cache_install.sh`
 ## Uninstallation
 `chmod +x ~/clear-cache/clear_cache_install.sh`   
 `~/clear_cache_install.sh --uninstall`
