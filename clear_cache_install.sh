@@ -1,5 +1,7 @@
 #!/bin/bash
 installer_version=1.0
+printf "clear-cache installer $installer_version, installing clear-cache...\n"
+sleep 1
 printf "Creating program file...\n"
 cat << '**ENDOFFILE**' > /tmp/clear-cache.tmp
 #!/bin/bash
