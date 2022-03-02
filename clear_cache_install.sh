@@ -1,5 +1,5 @@
 #!/bin/bash
-installer_version=1.2
+installer_version=2.0
 printf "clear-cache installer $installer_version\n"
 sleep 1
 if [ "$1" == "--uninstall" ]
@@ -11,38 +11,28 @@ then
     then
         sudo rm -v /bin/repeat
     fi
+    if [ "$2" == "--rm-log-files" ] || [ "$3" == "--rm-log-files" ]
+    then
+        printf "Removing old log files...\n"
+        rm -v $HOME/.cache/cache_cleared_*
+    fi
     printf "Uninstall complete!\n"
     sleep 3
     exit
 fi
-printf "Creating program file for \"clear-cache\"...\n"
-cat << '**ENDOFFILE**' > /tmp/clear-cache.tmp
-#!/bin/bash
-version=1.2.3
-printf "clear-cache, version $version\n"
-datevar=$(date "+%F-%T-%Z")
-cachepath="$HOME/.cache"
-if [[ ! -f "$cachepath/cache_cleared_$datevar.log" ]]
+
+if [[ ! -d "/bin" ]]
 then
-    printf "Log file: $cachepath/cache_cleared_$datevar.log\n"
-elif [ -f "$cachepath/cache_cleared_$datevar.log" ]
+    ln -s /bin /usr/bin
+elif [ -f "/bin" ]
 then
-    printf "Log file $cachepath/cache_cleared_$datevar.log already exists, exiting...)\n"
-    sleep 1
+    printf "FATAL: \"/bin\" is a file, exiting!\n"
     exit
-fi    
-repeat yes | rm -vr $cachepath/.fr-* &>> "$cachepath/cache_cleared_$datevar.log"
-repeat yes | rm -vr $cachepath/thumbnails/* &>> "$cachepath/cache_cleared_$datevar.log"
-repeat yes | rm -vr $cachepath/at-spi* &>> "$cachepath/cache_cleared_$datevar.log"
-if [ "$1" == "--rm-log" ]
-then
-    repeat yes | rm -vr $cachepath/cache_cleared_*
-elif [ "$1" == "--rm-whole-cache" ]
-then
-    repeat yes | rm -vr $HOME/.cache/*
 fi
-**ENDOFFILE**
+printf "Installing \"clear-cache\"...\n"
+sudo cp $HOME/clear-cache/clear-cache.sh /bin/clear-cache
 printf "Creating program file for dependency \"repeat\"...\n"
+if [[ ! -f "" ]]
 cat << '**ENDOFFILE**' > /tmp/repeat.tmp
 #!/bin/bash
 while ! [ -z "$1" ]
